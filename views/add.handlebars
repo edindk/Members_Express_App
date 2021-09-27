@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add member</title>
+</head>
+
+<body>
+  <h1 class="text-center mb-3">{{title}}</h1>
+  <div class="add-member-section">
+    <div class="recently-added">
+      <h4>Recently added members</h4>
+      <ul class="list-group">
+        {{#if recentlyAdded}}
+        {{#each recentlyAdded}}
+        <li class="list-group-item">Name: {{this.name}}, Date: {{this.date}}</li>
+        {{/each}}
+        {{else}}
+        <p>No members added recently</p>
+        {{/if}}
+      </ul>
+    </div>
+    <div class="add-member">
+      <h4>Add member</h4>
+      <form action="/api/members" method="POST">
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input type="text" name="name" class="form-control" id="inputName" placeholder="Enter name">
+        </div>
+        <input type="submit" value="Add member" class="btn btn-primary mt-2"></input>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<style>
+  .add-member-section {
+    display: grid;
+
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    gap: 0px;
+    height: 100%;
+
+  }
+
+  .recently-added {
+
+    margin-right: 3rem;
+    grid-row-start: 1;
+    grid-column-start: 1;
+
+    grid-row-end: 2;
+    grid-column-end: 3;
+
+  }
+
+  .add-member {
+
+
+    grid-row-start: 1;
+    grid-column-start: 3;
+
+    grid-row-end: 2;
+    grid-column-end: 6;
+
+  }
+</style>

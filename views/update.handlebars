@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update member</title>
+</head>
+
+<body>
+    <h1 class="text-center mb-3">{{title}}</h1>
+    <div class="update-member-section">
+        <div class="members">
+            <h4>Members</h4>
+            <ul class="list-group">
+                {{#if members}}
+                {{#each members}}
+                <li class="list-group-item">Name: {{this.name}}, Date: {{this.date}} <button
+                        onclick="updateInputFields('{{this.name}}', '{{this.email}}', '{{this.status}}', '{{this.id}}')"
+                        type="button" class="btn btn-success btn-sm w-25">Update</button></li>
+                {{/each}}
+                {{else}}
+                <p>No members found</p>
+                {{/if}}
+            </ul>
+        </div>
+        <div class="update-member">
+            <h4>Update member</h4>
+            <form id="form" action="" method="PUT">
+                <div class="form-group">
+                    <label for="inputEmail">Email address</label>
+                    <input id="id" type="email" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input id="name" type="text" name="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputStatus">Status</label>
+                    <input id="status" type="text" name="status" class="form-control">
+                </div>
+                <input type="submit" value="Update member" class="btn btn-primary mt-2"></input>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function updateInputFields(name, email, status, id) {
+        document.getElementById('id').value = email
+        document.getElementById('name').value = name
+        document.getElementById('status').value = status
+        document.getElementById('form').action = 'api/members/' + id
+    }
+</script>
+
+<style>
+    .update-member-section {
+        display: grid;
+
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+        gap: 0px;
+        height: 100%;
+
+    }
+
+    .members {
+
+        margin-right: 3rem;
+        grid-row-start: 1;
+        grid-column-start: 1;
+
+        grid-row-end: 2;
+        grid-column-end: 3;
+
+    }
+
+    .update-member {
+
+
+        grid-row-start: 1;
+        grid-column-start: 3;
+
+        grid-row-end: 2;
+        grid-column-end: 6;
+
+    }
+</style>
