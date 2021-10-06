@@ -1,0 +1,35 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Find member</title>
+</head>
+
+<body>
+    <h1 class="text-center mb-3">{{title}}</h1>
+    <div class="input-group rounded w-25">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+            aria-describedby="search-addon" id="search" />
+        <button type="button" class="btn btn-outline-primary" onclick="findMember()">Search</button>
+    </div>
+    <input type="text" class="form-control rounded w-25 mt-1" aria-describedby="search-addon" id="found" />
+</body>
+
+</html>
+
+<script>
+    function findMember() {
+        let id = document.getElementById('search').value;
+
+        axios.get('http://localhost:3000/api/members/' + id).then(response => {
+            let membString = '';
+            response.data.forEach(element => membString += element.name + ' ' + element.email);
+
+            document.getElementById('found').value = membString;
+        });
+    }
+</script>

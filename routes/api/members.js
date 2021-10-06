@@ -58,7 +58,6 @@ router.put('/:id', (req, res) => {
     } else {
         res.status(400).json({ msg: `No member found with the id of ${req.params.id}` });
     }
-
 });
 
 // Delete member

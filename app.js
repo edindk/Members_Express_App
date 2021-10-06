@@ -6,6 +6,7 @@ const logger = require('./middleware/logger')
 const exphbs = require('express-handlebars');
 const members = require('./Members');
 const recentlyAdded = require('./RecentlyAdded');
+const axios = require('./node_modules/axios');
 // init middleware
 //app.use(logger);
 
@@ -17,6 +18,7 @@ app.set('view engine', 'handlebars');
 app.get('/', (req, res) => res.render('index', {title: 'Member app', members}));
 app.get('/add', (req, res) => res.render('add', {title: 'Add member', recentlyAdded}));
 app.get('/update', (req, res) => res.render('update', {title: 'Update member', members}));
+app.get('/find', (req, res) => res.render('find', {title: 'Find member by id or name'}));
 
 /*Body Parser middleware. Middleware in order to be able to read the "body"
 of incoming JSON objects.*/

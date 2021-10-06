@@ -6,6 +6,7 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Update member</title>
 </head>
 
@@ -28,10 +29,14 @@
         </div>
         <div class="update-member">
             <h4>Update member</h4>
-            <form id="form" action="" method="PUT">
+            <form id="form">
+                <div class="form-group">
+                    <label for="inputId">ID</label>
+                    <input id="id" type="email" name="id" class="form-control">
+                </div>
                 <div class="form-group">
                     <label for="inputEmail">Email address</label>
-                    <input id="id" type="email" name="email" class="form-control">
+                    <input id="email" type="email" name="email" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="inputName">Name</label>
@@ -41,7 +46,7 @@
                     <label for="inputStatus">Status</label>
                     <input id="status" type="text" name="status" class="form-control">
                 </div>
-                <input type="submit" value="Update member" class="btn btn-primary mt-2"></input>
+                <input onclick="updateMember()" value="Update member" class="btn btn-primary mt-2"></input>
             </form>
         </div>
     </div>
@@ -51,10 +56,23 @@
 
 <script>
     function updateInputFields(name, email, status, id) {
-        document.getElementById('id').value = email
+        document.getElementById('email').value = email
         document.getElementById('name').value = name
         document.getElementById('status').value = status
-        document.getElementById('form').action = 'api/members/' + id
+        document.getElementById('id').value = id
+    }
+
+    function updateMember() {
+        let email = document.getElementById('email').value
+        let name = document.getElementById('name').value
+        let status = document.getElementById('status').value
+        let id = document.getElementById('id').value
+
+        axios.put('http://localhost:3000/api/members/' + id, { 'email': email, 'name': name, 'status': status })
+            .then(response => {
+                window.location.replace('/update');
+            })
+        console.log('http://localhost:3000/api/members/' + id);
     }
 </script>
 
